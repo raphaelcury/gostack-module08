@@ -1,8 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
   const [techs, setTechs] = useState([]);
   const [newTech, setNewTech] = useState('');
+
+  const handleAdd = useCallback(() => {
+    setTechs([...techs, newTech]);
+    setNewTech('');
+  }, [newTech, techs]);
 
   /* DidUpdate */
   useEffect(() => {
@@ -34,13 +39,7 @@ function App() {
         value={newTech}
         onChange={(e) => setNewTech(e.target.value)}
       />
-      <button
-        type="button"
-        onClick={() => {
-          setTechs([...techs, newTech]);
-          setNewTech('');
-        }}
-      >
+      <button type="button" onClick={() => handleAdd()}>
         Adicionar
       </button>
     </>
