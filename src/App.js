@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function App() {
   const [techs, setTechs] = useState([]);
@@ -19,6 +19,8 @@ function App() {
     }
   }, []);
 
+  const techsSize = useMemo(() => techs.length, [techs]);
+
   return (
     <>
       <ul>
@@ -26,6 +28,7 @@ function App() {
           <li key={tech}>{tech}</li>
         ))}
       </ul>
+      <p>Você tem {techsSize} tecnologias</p>
       <input
         type="text"
         value={newTech}
